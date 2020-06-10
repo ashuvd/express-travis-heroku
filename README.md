@@ -28,7 +28,7 @@ $ npm run имя_скрипта
     DOCKER_USERNAME - ваш login в https://hub.docker.com/
     DOCKER_PASSWORD - ваш пароль в https://hub.docker.com/
     HEROKU_USERNAME - ваш login в https://hub.docker.com/
-    HEROKU_APP_NAME - ваш login в https://dashboard.heroku.com/
+    HEROKU_APP_NAME - имя вашего проекта в https://dashboard.heroku.com/
     HEROKU_API_KEY - ваш api_key в https://dashboard.heroku.com/
     ```
 5) git add . -> git commit -m "next commit" -> git push
