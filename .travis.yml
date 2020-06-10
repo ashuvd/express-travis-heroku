@@ -13,4 +13,5 @@ deploy:
   script:
     docker push "$DOCKER_USERNAME"/express-travis-heroku;
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-  branch: travis-heroku
+  on:
+    branch: travis-heroku
