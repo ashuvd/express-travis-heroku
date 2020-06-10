@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "12"
+services:
+  - docker
+before_install:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+script:
+  - docker build -t "$DOCKER_USERNAME"/express-travis-heroku .
+  - docker tag "$DOCKER_USERNAME"/express-travis-heroku registry.heroku.com/$HEROKU_APP_NAME/web
+deploy:
+  provider: script
+  script:
+    docker push "$DOCKER_USERNAME"/express-travis-heroku;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+  branch: travis-heroku
