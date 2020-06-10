@@ -6,7 +6,7 @@ services:
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_PASSWORD" registry.heroku.com
+  - heroku login -u "$HEROKU_USERNAME" -p "$HEROKU_PASSWORD" registry.heroku.com
 script:
   - docker build -t "$DOCKER_USERNAME"/express-travis-heroku .
   - docker tag "$DOCKER_USERNAME"/express-travis-heroku registry.heroku.com/$HEROKU_APP_NAME/web
