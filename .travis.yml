@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "12"
+services:
+  - docker
+before_install:
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_PASSWORD" registry.heroku.com
+script:
+  - docker build -t "$DOCKER_USERNAME"/express-travis-heroku .
+  - docker tag "$DOCKER_USERNAME"/express-travis-heroku registry.heroku.com/$HEROKU_APP_NAME/web
+deploy:
+  provider: script
+  script:
+    docker push "$DOCKER_USERNAME"/express-travis-heroku;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+    heroku container:release web --app $HEROKU_APP_NAME;
+  on:
+    branch: travis-heroku
